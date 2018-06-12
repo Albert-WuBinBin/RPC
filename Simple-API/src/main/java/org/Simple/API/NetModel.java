@@ -1,6 +1,7 @@
 package org.Simple.API;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class NetModel implements Serializable{
 	
@@ -13,7 +14,7 @@ public class NetModel implements Serializable{
 	
 	private  Object[] args ;
 	
-	private String type;
+	private String[] types;
 
 	public String getClassName() {
 		return className;
@@ -39,12 +40,18 @@ public class NetModel implements Serializable{
 		this.args = args;
 	}
 
-	public String getType() {
-		return type;
+
+	public String[] getTypes() {
+		return types;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTypes(String[] types) {
+		this.types = types;
 	}
 
+	@Override
+	public String toString() {
+		return "NetModel [className=" + className + ", method=" + method + ", args=" + Arrays.toString(args)
+				+ ", types=" + Arrays.toString(types) + "]";
+	}
 }

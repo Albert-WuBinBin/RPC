@@ -15,17 +15,20 @@ public class ProxyFactory {
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			NetModel netModel = new NetModel();
 			
-			String className = proxy.getClass().getName();
-			
-			String m = method.getClass().getName();
-			
-			String type = args[0].getClass().getName();
+			Class<?>[] classes = proxy.getClass().getInterfaces();
+			String className = classes[0].getName();
 			
 			netModel.setClassName(className);
 			netModel.setArgs(args);
-			netModel.setMethod(m);
-			netModel.setType(type);
-			
+			netModel.setMethod(method.getName());
+			String [] types = null; 
+			if(args!=null) {
+				types = new String [args.length];
+				for (int i = 0; i < types.length; i++) {
+					types[i] = args[i].getClass().getName();
+				}
+			}
+			netModel.setTypes(types);
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			ObjectOutputStream outputStream = new ObjectOutputStream(os);
 			outputStream.writeObject(netModel);
