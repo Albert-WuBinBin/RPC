@@ -9,7 +9,7 @@ import org.Simple.API.HelloService;
 import org.Simple.API.SerializeUtils;
 
 
-public class TcpClient {
+public class RPCClient {
 	
 	 public static Object send(byte[] bs)  {
 		try {

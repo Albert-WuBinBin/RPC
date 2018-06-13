@@ -12,7 +12,7 @@ import java.util.Map;
 import org.Simple.API.NetModel;
 import org.Simple.API.SerializeUtils;
 
-public class TCPServer {
+public class RPCServer {
 	
 	public static void main(String[] args) 
 	{ 
@@ -68,6 +68,7 @@ public class TCPServer {
 			
 			byte[] byteArray = SerializeUtils.ObjectToByte(object);
 			return byteArray;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
