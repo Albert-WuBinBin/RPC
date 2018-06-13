@@ -1,18 +1,18 @@
 package org.Simple.C;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import org.Simple.API.NetModel;
+import org.Simple.API.SerializeUtils;
 
 public class ProxyFactory {
 	
 	private static InvocationHandler handler = new InvocationHandler() {
 		
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+			
 			NetModel netModel = new NetModel();
 			
 			Class<?>[] classes = proxy.getClass().getInterfaces();
@@ -21,6 +21,7 @@ public class ProxyFactory {
 			netModel.setClassName(className);
 			netModel.setArgs(args);
 			netModel.setMethod(method.getName());
+			
 			String [] types = null; 
 			if(args!=null) {
 				types = new String [args.length];
@@ -29,12 +30,10 @@ public class ProxyFactory {
 				}
 			}
 			netModel.setTypes(types);
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			ObjectOutputStream outputStream = new ObjectOutputStream(os);
-			outputStream.writeObject(netModel);
-			byte[] byteArray = os.toByteArray();
-			TcpClient.send(byteArray);
-			return null;
+			
+			byte[] byteArray = SerializeUtils.ObjectToByte(netModel);
+			Object send = TcpClient.send(byteArray);
+			return send;
 		}
 	};
 
