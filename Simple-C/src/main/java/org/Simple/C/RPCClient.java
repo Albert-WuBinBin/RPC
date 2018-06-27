@@ -19,7 +19,7 @@ public class RPCClient {
 			InputStream in = socket.getInputStream();  
 			byte[] buf = new byte[1024];
 			in.read(buf);
-			Object formatDate = SerializeUtils.byteToObject(buf);
+			Object formatDate = SerializeUtils.deSerialize(buf);
 			socket.close();  
 			return formatDate;
 		} catch (Exception e) {

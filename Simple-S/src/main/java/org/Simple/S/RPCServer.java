@@ -47,7 +47,7 @@ public class RPCServer {
 			Map<String, String> map = new HashMap<String,String>();
 			map.put("org.Simple.API.HelloService", "org.Simple.S.HelloServiceImpl");
 			
-			NetModel netModel = (NetModel)SerializeUtils.byteToObject(bs);
+			NetModel netModel = (NetModel)SerializeUtils.deSerialize(bs);
 			
 			String className = netModel.getClassName();
 			String[] types = netModel.getTypes();
@@ -66,7 +66,7 @@ public class RPCServer {
 			Method method = clazz.getMethod(netModel.getMethod(),typeClazzs);
 			Object object = method.invoke(clazz.newInstance(), args);
 			
-			byte[] byteArray = SerializeUtils.ObjectToByte(object);
+			byte[] byteArray = SerializeUtils.serialize(object);
 			return byteArray;
 			
 		} catch (Exception e) {

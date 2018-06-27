@@ -31,7 +31,7 @@ public class ProxyFactory {
 			}
 			netModel.setTypes(types);
 			
-			byte[] byteArray = SerializeUtils.ObjectToByte(netModel);
+			byte[] byteArray = SerializeUtils.serialize(netModel);
 			Object send = RPCClient.send(byteArray);
 			return send;
 		}
