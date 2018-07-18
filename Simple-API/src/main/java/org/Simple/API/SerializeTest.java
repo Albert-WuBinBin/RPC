@@ -2,7 +2,7 @@ package org.Simple.API;
 
 import java.io.IOException;
 /**
- * 几个序列胡比较
+ * 几个序列化比较
  */
 public class SerializeTest {
 	
